@@ -66,3 +66,27 @@ header {
 #searchBtn:hover, #prevBtn:hover, #nextBtn:hover, #resetBtn:hover {
   opacity: 0.8;
 }
+
+.card{
+  background-color: #fff;
+    width: 17%;
+    height: 34vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 1.2vw;
+    font-weight: bold;
+}
+.card img{
+  width: 80%;
+  height: 70%;
+  object-fit: cover;
+}
+.card h3{
+  text-transform: capitalize;
+}
+.card:hover{
+  transform: scale(1.1);
+}

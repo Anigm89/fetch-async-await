@@ -38,27 +38,23 @@ ObtenerPokemons(paginaIncial);
 const pokemonInfo=(data)=>{
     let todos = data.results;
 
-   //for(let i=0; i<=todos.length; i++){
     todos.forEach(element => {
-
      fetch(element.url)
      .then((response) => response.json())
      .then(data =>{
          console.log('d',data)
         
- 
          let name = data.name;
          let img = data.sprites.front_shiny;
       console.log('n', name)
- 
+
         let infopokemon= `
-         <div class="contenedorPokemon">
-         <h3> ${name}</h3>
-         <img src="${img}" />
-             </div>`
-             visible.innerHTML += infopokemon
+         <div class="card">
+             <img src="${img}" />
+             <h3> ${name}</h3>
+         </div>`
+        visible.innerHTML += infopokemon
      })
-    // }
     });
 }
 
@@ -95,10 +91,10 @@ let search = input.value.toLocaleLowerCase();
      console.log('n', name)
 
        let infopokemon= `
-        <div class="contenedorPokemon">
-        <h3> ${name}</h3>
-        <img src="${img}" />
-            </div>`
+        <div class="card">
+            <h3> ${name}</h3>
+            <img src="${img}" />
+        </div>`
             visible.innerHTML += infopokemon
         })
 })
@@ -107,4 +103,32 @@ let search = input.value.toLocaleLowerCase();
 resetBtn.addEventListener('click', () => {
     location.reload();
    })
-   
+
+
+//buscador input
+function buscador(){ 
+    input.addEventListener('keyup', () => {
+        console.log('value', input.value)
+        let search = input.value.toLowerCase();
+        let allPokemon = document.querySelectorAll('.card');
+        visible.innerHTML = ''; 
+
+        allPokemon.forEach(card =>{
+            let pokemonName = card.querySelector('h3').textContent.toLowerCase();
+            let src = card.querySelector('img').getAttribute('src');
+
+            if(pokemonName.indexOf(search) !== -1){
+                let template= `
+                <div class="card">
+                    <img src ="${src}" alt="${pokemonName}">
+                    <p>${pokemonName}</p>
+                </div>
+                `
+                visible.innerHTML += template;
+            }
+        })
+    })
+}
+
+buscador();
+
